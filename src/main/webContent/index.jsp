@@ -11,6 +11,21 @@
 <link rel="stylesheet" href="${cssUrl}">
 </head>
 <body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div style="padding:8px 12px;background:#f6f6f6;border-bottom:1px solid #e5e5e5">
+  <c:choose>
+    <c:when test="${not empty sessionScope.user}">
+      ようこそ、${sessionScope.user} さん　
+      <form action="<c:url value='/logout'/>" method="post" style="display:inline">
+        <button type="submit">ログアウト</button>
+      </form>
+    </c:when>
+    <c:otherwise>
+      <a href="<c:url value='/login'/>">ログイン</a>
+    </c:otherwise>
+  </c:choose>
+</div>
+
 <div class="container">
 	<h1>お問い合わせフォーム</h1>
 	<form action="${inquiryUrl}" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
